@@ -1,8 +1,9 @@
 import JSZip from "jszip";
+import { escapeRegExp } from "lodash";
 import mime from "mime-types";
 import { v4 as uuidv4 } from "uuid";
 import documentImporter from "@server/commands/documentImporter";
-import Logger from "@server/logging/logger";
+import Logger from "@server/logging/Logger";
 import { FileOperation, User } from "@server/models";
 import { zipAsFileTree, FileTreeNode } from "@server/utils/zip";
 import ImportTask, { StructuredImportData } from "./ImportTask";
@@ -160,9 +161,15 @@ export default class ImportMarkdownZipTask extends ImportTask {
 
         const reference = `<<${attachment.id}>>`;
         document.text = document.text
-          .replace(new RegExp(attachment.path, "g"), reference)
-          .replace(new RegExp(normalizedAttachmentPath, "g"), reference)
-          .replace(new RegExp(`/${normalizedAttachmentPath}`, "g"), reference);
+          .replace(new RegExp(escapeRegExp(attachment.path), "g"), reference)
+          .replace(
+            new RegExp(escapeRegExp(normalizedAttachmentPath), "g"),
+            reference
+          )
+          .replace(
+            new RegExp(escapeRegExp(`/${normalizedAttachmentPath}`), "g"),
+            reference
+          );
       }
     }
 

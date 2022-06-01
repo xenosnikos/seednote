@@ -15,8 +15,8 @@ import usePageVisibility from "~/hooks/usePageVisibility";
 import useStores from "~/hooks/useStores";
 import useToasts from "~/hooks/useToasts";
 import MultiplayerExtension from "~/multiplayer/MultiplayerExtension";
+import Logger from "~/utils/Logger";
 import { supportsPassiveListener } from "~/utils/browser";
-import Logger from "~/utils/logger";
 import { homePath } from "~/utils/routeHelpers";
 
 type Props = EditorProps & {
@@ -139,9 +139,6 @@ function MultiplayerEditor({ onSynced, ...props }: Props, ref: any) {
     });
 
     if (debug) {
-      provider.on("status", (ev: ConnectionStatusEvent) =>
-        Logger.debug("collaboration", "status", ev)
-      );
       provider.on("message", (ev: MessageEvent) =>
         Logger.debug("collaboration", "incoming", {
           message: ev.message,
@@ -241,8 +238,8 @@ function MultiplayerEditor({ onSynced, ...props }: Props, ref: any) {
   // we must prevent the user from continuing to edit as their changes will not
   // be persisted. See: https://github.com/yjs/yjs/issues/303
   React.useEffect(() => {
-    function onUnhandledError(err: any) {
-      if (err.message.includes("URIError: URI malformed")) {
+    function onUnhandledError(event: ErrorEvent) {
+      if (event.message.includes("URIError: URI malformed")) {
         showToast(
           t(
             "Sorry, the last change could not be persisted – please reload the page"

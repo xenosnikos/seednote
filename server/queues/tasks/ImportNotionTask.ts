@@ -1,10 +1,10 @@
 import path from "path";
 import JSZip from "jszip";
-import { compact } from "lodash";
+import { compact, escapeRegExp } from "lodash";
 import mime from "mime-types";
 import { v4 as uuidv4 } from "uuid";
 import documentImporter from "@server/commands/documentImporter";
-import Logger from "@server/logging/logger";
+import Logger from "@server/logging/Logger";
 import { FileOperation, User } from "@server/models";
 import { zipAsFileTree, FileTreeNode } from "@server/utils/zip";
 import ImportTask, { StructuredImportData } from "./ImportTask";
@@ -148,7 +148,7 @@ export default class ImportNotionTask extends ImportTask {
           );
         } else {
           text = text.replace(
-            new RegExp(image.src, "g"),
+            new RegExp(escapeRegExp(image.src), "g"),
             `<<${attachment.id}>>`
           );
         }
