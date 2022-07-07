@@ -61,6 +61,7 @@ export default function useDictionary() {
         }),
       placeholder: t("Placeholder"),
       quote: t("Quote"),
+      board: t("Board"),
       removeLink: t("Remove link"),
       searchOrPasteLink: `${t("Search or paste a link")}…`,
       strikethrough: t("Strikethrough"),

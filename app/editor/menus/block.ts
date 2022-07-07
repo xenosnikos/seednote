@@ -1,5 +1,6 @@
 import {
   BlockQuoteIcon,
+  CheckmarkIcon,
   BulletedListIcon,
   CodeIcon,
   Heading1Icon,
@@ -98,6 +99,12 @@ export default function blockMenuItems(dictionary: Dictionary): MenuItem[] {
       title: dictionary.table,
       icon: TableIcon,
       attrs: { rowsCount: 3, colsCount: 3 },
+    },
+    {
+      name: "board",
+      title: dictionary.board,
+      icon: CheckmarkIcon,
+      shortcut: `${metaDisplay} [`,
     },
     {
       name: "blockquote",

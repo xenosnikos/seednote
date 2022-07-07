@@ -3,6 +3,7 @@ import Highlight from "../marks/Highlight";
 import Mark from "../marks/Mark";
 import TemplatePlaceholder from "../marks/Placeholder";
 import Attachment from "../nodes/Attachment";
+import Board from "../nodes/Board";
 import Blockquote from "../nodes/Blockquote";
 import BulletList from "../nodes/BulletList";
 import CheckboxItem from "../nodes/CheckboxItem";
@@ -32,6 +33,7 @@ const fullPackage: (typeof Node | typeof Mark | typeof Extension)[] = [
   CheckboxList,
   CheckboxItem,
   Blockquote,
+  Board,
   BulletList,
   OrderedList,
   Embed,
